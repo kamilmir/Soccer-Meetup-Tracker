@@ -1,7 +1,7 @@
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const { default: mongoose } = require('mongoose');
-const uri = "mongodb+srv://kamil:kamil12345@comp3123assignment1.rltzf.mongodb.net/capstone?retryWrites=true&w=majority&appName=COMP3123Assignment1";
+const uri = "mongodb+srv://kamil:kamil12345@cluster0.xqyg2.mongodb.net/soccer_meetup_tracker?retryWrites=true&w=majority&appName=soccer_meetup_tracker";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
