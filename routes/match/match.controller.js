@@ -105,4 +105,46 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.post("/remove/:id", async (req, res) => {
+  try {
+    const match = await Match.findById(req.params.id);
+    if (!match) {
+      return res.status(404).json({ message: "Match not found" });
+    }
+
+    // Check if the user is in the list of subscribers
+    const userIndex = match.listPeopleSubscribed.indexOf(req.userId);
+    if (userIndex === -1) {
+      return res.status(400).json({ message: "You are not subscribed to this match" });
+    }
+
+    // Remove the user from the list
+    match.listPeopleSubscribed.splice(userIndex, 1);
+
+    // Save the updated match
+    await match.save();
+    res.status(200).json({ message: "Successfully removed from the match", match });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "An error occurred while removing from the match" });
+  }
+});
+
+// Get all people who registered for a specific match
+router.get("/registered/:id", async (req, res) => {
+  try {
+    const match = await Match.findById(req.params.id).populate("listPeopleSubscribed", "username email");
+    if (!match) {
+      return res.status(404).json({ message: "Match not found" });
+    }
+
+    // Return the list of registered users
+    res.status(200).json({ users: match.listPeopleSubscribed });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "An error occurred while fetching registered users" });
+  }
+});
+
+
 module.exports = router;

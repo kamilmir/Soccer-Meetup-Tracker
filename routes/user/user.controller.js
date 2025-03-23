@@ -28,7 +28,8 @@ router.post('/login', validate.login, async function(req, res, next) {
   const token = jwt.sign({id: user.id, exp: Math.floor(Date.now() / 1000) + (60 * 60)}, secretKey)
   return res.status(httpStatus.OK).json({
     message: 'Login successfully',
-    jwt_token: token
+    jwt_token: token,
+    user_id: user._id
   })
 });
 
