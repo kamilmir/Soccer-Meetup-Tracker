@@ -29,3 +29,21 @@ Ensure you have Node.js (version 14.x or later) and npm installed.
 1. Clone the repository:
 ```bash
 git clone https://github.com/kamilmir/Soccer-Meetup-Tracker
+```
+2. Install dependencies
+```bash
+cd be
+npm install
+cd ../fe
+npm install
+```
+
+### Run BE
+```bash
+npm run start
+```
+
+### Run FE
+```bash
+npm run serve
+```
